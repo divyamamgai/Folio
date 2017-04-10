@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Folio</title>
+    <link rel="stylesheet" href="../dist/css/Folio.min.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../dist/js/Folio.min.js"></script>
+    <style>
+
+        body {
+            font-size: 62.5%;
+            font-family: Consolas, monospace;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 4.8rem;
+        }
+
+        h1 > span {
+            color: crimson;
+        }
+
+        h2 {
+            font-size: 2.4rem;
+        }
+
+        p {
+            font-size: 1.6rem;
+        }
+
+        .Info {
+            font-size: 1.8rem;
+            float: right;
+            text-align: right;
+            padding: 1.5rem 0 0 0;
+        }
+
+        .Pagination {
+            font-size: 1.6rem;
+            margin: 0.5rem;
+            display: inline-block;
+        }
+
+        .Message {
+            font-size: 1.6rem;
+            padding: 0.5rem;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <p class="Info">
+                Created By <b>Divya Mamgai</b>
+            </p>
+            <h1><span>Folio</span>.js</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Using JavaScript</h2>
+            <div id="PaginationOneTop" class="Pagination"></div>
+            <div id="MessageOne" class="Message"></div>
+            <div id="PaginationOneBottom" class="Pagination"
+                 data-Folio
+                 data-total-pages="100"
+                 data-max-pages="9"
+                 data-active-page="99"
+                 data-previous-class="glyphicon glyphicon-chevron-left"
+                 data-next-class="glyphicon glyphicon-chevron-right"
+                 data-infinite-scrolling="true"></div>
+            <p class="text-info" style="margin-top: 1rem">
+                Above Folios are linked. Try changing in page in one of the above and the change will be reflected on
+                the other one.
+                <br>
+                <b class="text-primary">Note: <code>onUpdate()</code> is only called once.</b>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Using HTML Attribute Options</h2>
+            <p class="text-info">
+                The function name <code>data-on-update</code> attribute points to should be declared before the
+                Folio.js's version of the <code>$(function(){...})</code> is executed.
+            </p>
+            <div id="PaginationTwo" class="Pagination"
+                 data-Folio
+                 data-total-pages="50"
+                 data-max-pages="9"
+                 data-active-page="51"
+                 data-previous-class="glyphicon glyphicon-chevron-left"
+                 data-next-class="glyphicon glyphicon-chevron-right"
+                 data-infinite-scrolling="true"
+                 data-on-update="updateMessage"></div>
+            <div id="MessageTwo" class="Message"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+    (function ($, d) {
+
+        // This definition would work, but see the same definition at the end of $(function(){...}) for more details.
+        window.updateMessage = function (page) {
+            $('#MessageTwo', d).text('Opened Page #' + page);
+        };
+
+        $(function () {
+
+            var $messageOne = $('#MessageOne', d),
+                $paginationOneTop = $('#PaginationOneTop', d),
+                $paginationOneBottom = $('#PaginationOneBottom', d);
+
+            $paginationOneTop.Folio({
+                totalPages: 100,
+                maxPages: 17,
+                activePage: 1,
+                previousClass: 'glyphicon glyphicon-chevron-left',
+                nextClass: 'glyphicon glyphicon-chevron-right',
+                onUpdate: function (page) {
+                    $messageOne.text('Opened Page #' + page);
+                }
+            }).GetFolio().link($paginationOneBottom.GetFolio());
+
+//            $paginationOneBottom.GetFolio().link($paginationOneTop.GetFolio());
+
+            // You can get Folio object linked to a pagination using $.fn.GetFolio method and even from an array.
+            // Note: Check that for the second Folio we don't have the desired onUpdate() function.
+            $('.Pagination', d).GetFolio().each(function () {
+                console.log(this);
+            });
+
+            // Comment the above same definition, before $(function(){...}), and uncomment the below definition and
+            // you will find that the onUpdate() does not work. This is because Folio.js is included first and its
+            // version of $(function(){...}) is called before this one. So the function name being passed to the data
+            // attribute should be declared outside, and before, the $(function(){...}) is called.
+//            window.updateMessage = function (page) {
+//                $('#MessageTwo', d).text('Opened Page #' + page);
+//            };
+
+        });
+    })(jQuery, document);
+</script>
+</html>

@@ -1,0 +1,53 @@
+@import 'nib'
+
+.Folio {
+    font-family: Consolas, monospace;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+    background-color: #f4f4f4;
+    transition: all ease-in-out 0.5s;
+    padding: 5px;
+    border: solid 1px #cccccc;
+    user-select: none;
+}
+
+.FolioPage {
+    padding: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+    top: -2px;
+}
+
+.FolioPage:hover {
+    font-weight 600;
+}
+
+.FolioPage.Active {
+    font-weight 600;
+    color: crimson;
+}
+
+.FolioControl {
+    padding: 5px;
+    cursor: pointer;
+    color: #555;
+}
+
+.FolioControl:hover {
+    color: #222;
+}
+
+.FolioControl.Disabled {
+    padding: 5px;
+    cursor: default;
+    color: #888;
+}
+
+.FolioNext:before {
+    content: "Next";
+}
+
+.FolioPrevious:before {
+    content: "Previous";
+}

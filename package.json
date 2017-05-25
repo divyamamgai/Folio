@@ -1,56 +1,55 @@
 {
-  "name": "Folio",
-  "version": "1.0.0",
-  "description": "Creates easy to use pagination for your websites.",
-  "keywords": [
-    "jquery-plugin",
-    "jquery",
-    "plugin",
-    "pagination",
-    "pages"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/divyamamgai/Folio.git"
-  },
-  "bugs": {
-    "url": "https://github.com/divyamamgai/Folio/issues"
-  },
-  "author": {
-    "name": "Divya Mamgai",
-    "email": "divyamamgai21@gmail.com",
-    "url": "https://github.com/divyamamgai"
-  },
-  "homepage": "http://divyamamgai.github.io/Folio",
-  "contributors": [
-    {
-      "name": "Divya Mamgai",
-      "email": "divyamamgai21@gmail.com",
-      "url": "https://github.com/divyamamgai"
+    "name": "Folio",
+    "version": "1.0.0",
+    "description": "Creates easy to use pagination for your websites.",
+    "keywords": [
+        "jquery-plugin",
+        "jquery",
+        "plugin",
+        "pagination",
+        "pages"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/divyamamgai/Folio.git"
+    },
+    "bugs": {
+        "url": "https://github.com/divyamamgai/Folio/issues"
+    },
+    "author": {
+        "name": "Divya Mamgai",
+        "email": "divyamamgai21@gmail.com",
+        "url": "https://github.com/divyamamgai"
+    },
+    "homepage": "http://divyamamgai.github.io/Folio",
+    "contributors": [{
+        "name": "Divya Mamgai",
+        "email": "divyamamgai21@gmail.com",
+        "url": "https://github.com/divyamamgai"
+    }],
+    "license": "MIT",
+    "dependencies": {
+        "jquery": ">=1.5.1"
+    },
+    "devDependencies": {
+        "bootstrap": "latest",
+        "stylus": "latest",
+        "nib": "latest",
+        "clean-css": "latest",
+        "clean-css-cli": "latest",
+        "jshint": "latest",
+        "jsdoc": "latest",
+        "uglify-js": "latest",
+        "rimraf": "latest"
+    },
+    "scripts": {
+        "prebuild:js": "jshint src/js",
+        "build:js": "cp src/js/Folio.js dist/js/Folio.js",
+        "postbuild:js": "uglifyjs src/js/Folio.js > dist/js/Folio.min.js -mc",
+        "build:css": "stylus -u nib src/styl/Folio.styl -o dist/css/Folio.css",
+        "postbuild:css": "cleancss dist/css/Folio.css > dist/css/Folio.min.css",
+        "build": "npm run build:css && npm run build:js",
+        "clean": "rimraf dist",
+        "doc": "jsdoc dist/js/Folio.js -d documentation"
     }
-  ],
-  "license": "MIT",
-  "dependencies": {
-    "jquery": ">=1.5.1"
-  },
-  "devDependencies": {
-    "bootstrap": "latest",
-    "stylus": "latest",
-    "nib": "latest",
-    "clean-css": "latest",
-    "jshint": "latest",
-    "jsdoc": "latest",
-    "uglify-js": "latest",
-    "rimraf": "latest"
-  },
-  "scripts": {
-    "prebuild:js": "jshint src/js",
-    "build:js": "cp src/js/Folio.js dist/js/Folio.js",
-    "postbuild:js": "uglifyjs src/js/Folio.js > dist/js/Folio.min.js -mc",
-    "build:css": "stylus -u nib src/styl/Folio.styl -o dist/css/Folio.css",
-    "postbuild:css": "cleancss dist/css/Folio.css > dist/css/Folio.min.css",
-    "build": "npm run build:css && npm run build:js",
-    "clean": "rimraf dist",
-	"doc": "jsdoc dist/js/Folio.js -d documentation"
-  }
 }

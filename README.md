@@ -1,4 +1,4 @@
 # Folio
-Pagination plugin for jQuery.
+A light pagination plugin for jQuery.
 
-Demo - https://divyamamgai.github.io/Folio/demo/index.html
+Demo & Doc - https://divyamamgai.github.io/Folio/demo/index.html

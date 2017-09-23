@@ -28,8 +28,40 @@
             font-size: 2.4rem;
         }
 
+        h3 {
+            margin: 0.5rem 0 0 0;
+            padding: 0.75rem;
+            -webkit-border-radius: 0.5rem 0.5rem 0 0;
+            -moz-border-radius: 0.5rem 0.5rem 0 0;
+            border-radius: 0.5rem 0.5rem 0 0;
+            font-size: 1.6rem;
+            font-weight: bold;
+            background-color: #f4f4f4;
+            border: solid 1px #cccccc;
+            color: #212121;
+        }
+
         p {
             font-size: 1.6rem;
+        }
+
+        pre {
+            margin: 0.5rem 0;
+        }
+
+        pre:last-child {
+            margin-bottom: 0;
+        }
+
+        .table {
+            font-size: 1.6rem;
+            -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .table td {
+            border-color: #cccccc !important;
         }
 
         .Info {
@@ -57,7 +89,7 @@
     <div class="row">
         <div class="col-sm-12">
             <p class="Info">
-                Created By <b>Divya Mamgai</b>
+                Created By <strong>Divya Mamgai</strong>
             </p>
             <h1><span>Folio</span>.js</h1>
         </div>
@@ -79,8 +111,45 @@
                 Above Folios are linked. Try changing in page in one of the above and the change will be reflected on
                 the other one.
                 <br>
-                <b class="text-primary">Note: <code>onUpdate()</code> is only called once.</b>
+                <strong class="text-primary">Note: <code>onUpdate()</code> is only called once.</strong>
             </p>
+            <h3>Source Code</h3>
+            <table class="table table-bordered">
+                <tr>
+                    <td>
+                        <em>HTML</em>
+                        <pre>
+&lt;div id=&quot;PaginationOneTop&quot; class=&quot;Pagination&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;MessageOne&quot; class=&quot;Message&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;PaginationOneBottom&quot; class=&quot;Pagination&quot;
+     data-Folio
+     data-total-pages=&quot;100&quot;
+     data-max-pages=&quot;9&quot;
+     data-active-page=&quot;99&quot;
+     data-previous-class=&quot;glyphicon glyphicon-chevron-left&quot;
+     data-next-class=&quot;glyphicon glyphicon-chevron-right&quot;
+     data-infinite-scrolling=&quot;true&quot;&gt;&lt;/div&gt;</pre>
+                        <em>JS</em>
+                        <pre>
+var $messageOne = $('#MessageOne', d),
+    $paginationOneTop = $('#PaginationOneTop', d),
+    $paginationOneBottom = $('#PaginationOneBottom', d);
+
+$paginationOneTop.Folio({
+    totalPages: 100,
+    maxPages: 17,
+    activePage: 1,
+    previousClass: 'glyphicon glyphicon-chevron-left',
+    nextClass: 'glyphicon glyphicon-chevron-right',
+    onUpdate: function (page) {
+        $messageOne.text('Opened Page #' + page);
+    }
+}).GetFolio().link($paginationOneBottom.GetFolio());
+
+$paginationOneBottom.GetFolio().link($paginationOneTop.GetFolio());</pre>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <div class="row">
@@ -100,6 +169,351 @@
                  data-infinite-scrolling="true"
                  data-on-update="updateMessage"></div>
             <div id="MessageTwo" class="Message"></div>
+            <h3>Source Code</h3>
+            <table class="table table-bordered">
+                <tr>
+                    <td>
+                        <em>HTML</em>
+                        <pre>
+&lt;div id=&quot;PaginationTwo&quot; class=&quot;Pagination&quot;
+     data-Folio
+     data-total-pages=&quot;50&quot;
+     data-max-pages=&quot;9&quot;
+     data-active-page=&quot;51&quot;
+     data-previous-class=&quot;glyphicon glyphicon-chevron-left&quot;
+     data-next-class=&quot;glyphicon glyphicon-chevron-right&quot;
+     data-infinite-scrolling=&quot;true&quot;
+     data-on-update=&quot;updateMessage&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;MessageTwo&quot; class=&quot;Message&quot;&gt;&lt;/div&gt;</pre>
+                        <em>JS</em>
+                        <pre>
+window.updateMessage = function (page) {
+    $('#MessageTwo', d).text('Opened Page #' + page + ' {window.updateMessage()}');
+};</pre>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 style="margin-top: 3rem">Options</h3>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td><strong>useHTMLOptions</strong> <code>{boolean}</code></td>
+                                <td>If <code>true</code> HTML options are used. Default is <code>true</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>infiniteScrolling</strong> <code>{boolean}</code></td>
+                                <td>
+                                    If <code>true</code> the pagination scrolls back to front or vice versa. Default is
+                                    <code>false</code>.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>totalPages</strong> <code>{int}</code></td>
+                                <td>Total number of pages in the pagination. Default is <code>0</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>maxPages</strong> <code>{int}</code></td>
+                                <td>Maximum number of pages to be displayed at a time. Default is <code>9</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>activePage</strong> <code>{int}</code></td>
+                                <td>Current page number. Default is <code>1</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>nextClass</strong> <code>{string}</code></td>
+                                <td>Class to be added to the next button. Default is empty.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>previousClass</strong> <code>{string}</code></td>
+                                <td>Class to be added to the previous button. Default is empty.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>onUpdate</strong> <code>{Function}</code></td>
+                                <td>
+                                    Function to be called when a page is changed using the pagination. Default is
+                                    <code>$.noop</code>.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>disableInitialOnUpdate</strong> <code>{boolean}</code></td>
+                                <td>
+                                    If <code>true</code> then <code>onUpdate()</code> function is not called when the
+                                    <code>Folio</code> object is initialized. Default is <code>false</code>.
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Exposed API</h2>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>$.Folio(defaultOptions)</h3>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td><strong>Arguments</strong></td>
+                                <td><code>{Object}</code> defaultOptions</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Action</strong></td>
+                                <td>Overrides the <code>defaults</code> options used for every instance of
+                                    <code>Folio</code>.
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>Folio.setOptions(options)</h3>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td><strong>Arguments</strong></td>
+                                <td><code>{Object}</code> options</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Action</strong></td>
+                                <td>
+                                    Creates a new <code>Object</code> from the defaults and extends it with the options
+                                    <code>Object</code> provided.
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>Folio.onUpdate(callback)</h3>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td><strong>Arguments</strong></td>
+                                <td><code>{Function}</code> callback</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Action</strong></td>
+                                <td>
+                                    Sets the <code>onUpdate()</code> function to be called each time the
+                                    <code>this.update()</code> function is called. This is just an added utility
+                                    function, since same can be achieved using <code>this.setOptions()</code> function
+                                    as used in it.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Returns</strong></td>
+                                <td>
+                                    <code>{Folio}</code>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>Folio.generate()</h3>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td><strong>Action</strong></td>
+                                <td>
+                                    Generates the HTML elements of page numbers in the <code>.Folio .FolioPages</code>
+                                    element corresponding to the maximum elements it can have and store them in a jQuery
+                                    object array (<strong>Note:</strong> DOM Elements are mapped to their jQuery objects
+                                    for
+                                    faster operations later on.) i.e., <code>this.$pageArray</code>. Initially each
+                                    element is given numbering from 1 to <code>this.properties.maxPages</code>. Also it
+                                    clears the <code>.FolioPages</code> elements HTML content before appending page
+                                    number elements.<br><br>
+                                    <strong>Note:</strong> This function should not be called many times in succession
+                                    because it
+                                    is very costly operation and is only automatically called during initialization.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Returns</strong></td>
+                                <td>
+                                    <code>{Folio}</code>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>Folio.update(disableOnUpdate, disableSync)</h3>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td><strong>Arguments</strong></td>
+                                <td>
+                                    <code>{boolean}</code> [disableOnUpdate] - If <code>true</code> then
+                                    <code>onUpdate</code> is not called. Default is <code>false</code>.
+                                    <br><br>
+                                    <code>{boolean}</code> [disableSync] - If <code>true</code> then synchronisation is
+                                    not done i.e., <code>setActivePage(activePage)</code> is not called for the linked
+                                    <code>Folio</code> objects. Default is <code>false</code>.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Action</strong></td>
+                                <td>
+                                    Updates the <code>.FolioPages</code> page numbering corresponding to the current
+                                    <code>activePage</code>. No new element is created and only the numbers(text) of the
+                                    existing page number elements is updated using the cached <code>.FolioPages
+                                    .FolioPage</code> jQuery object array i.e., <code>this.$pageArray</code>. Also
+                                    updates (Either removes or adds the <code>.Disabled</code> class based on the
+                                    condition.) the next and previous buttons <code>.Disabled</code> class.
+                                    <br><br>
+                                    <strong>Note:</strong> It also calls the <code>this.properties.onUpdate()</code>
+                                    function
+                                    automatically.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Returns</strong></td>
+                                <td>
+                                    <code>{Folio}</code>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>Folio.setActivePage(page, disableOnUpdate, disableSync)</h3>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td><strong>Arguments</strong></td>
+                                <td>
+                                    <code>{int}</code> page - Page Number to set the <code>activePage</code> to.
+                                    <br><br>
+                                    <code>{boolean}</code> [disableOnUpdate] - If <code>true</code> then
+                                    <code>onUpdate</code> is not called. Default is <code>false</code>.
+                                    <br><br>
+                                    <code>{boolean}</code> [disableSync] - If <code>true</code> then synchronisation is
+                                    not done i.e., <code>setActivePage(page)</code> is not called for the linked
+                                    <code>Folio</code> objects. Default is <code>false</code>.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Action</strong></td>
+                                <td>
+                                    Sets the <code>activePage</code> of the pagination to the given page number and also
+                                    calls <code>update()</code> function automatically.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Returns</strong></td>
+                                <td>
+                                    <code>{Folio}</code>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>Folio.nextPage()</h3>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td><strong>Action</strong></td>
+                                <td>
+                                    Increments the <code>activePage</code> number. If
+                                    <code>this.properties.infiniteScrolling</code> is enabled it jumps to 1<sup>st</sup>
+                                    page if called when the activePage is the last page.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Returns</strong></td>
+                                <td>
+                                    <code>{Folio}</code>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>Folio.nextPage()</h3>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td><strong>Action</strong></td>
+                                <td>
+                                    Decrements the <code>activePage</code> number. If
+                                    <code>this.properties.infiniteScrolling</code> is enabled it jumps to last page if
+                                    called when the <code>activePage</code> is the 1st page.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Returns</strong></td>
+                                <td>
+                                    <code>{Folio}</code>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>Folio.link(folio, disableBackLinking)</h3>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td><strong>Arguments</strong></td>
+                                <td>
+                                    <code>{Folio}</code> folio - <code>Folio</code> object to link this one with.
+                                    <br><br>
+                                    <code>{boolean}</code> [disableBackLinking] - If <code>true</code> then
+                                    <code>setActivePage(activePage)</code> and <code>link(this)</code> is not called for
+                                    the linking <code>Folio</code> object. Default is <code>false</code>.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Action</strong></td>
+                                <td>
+                                    Links this <code>Folio</code> object to the one passed as a parameter. Both the
+                                    <code>Folio</code> objects should have equal number of pages. But the
+                                    <code>maxPages</code> can be different. The <code>onUpdate</code> function for all
+                                    the <code>Folio</code> objects being linked are set to the onUpdate function of this
+                                    <code>Folio</code> object (one being linked to).
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Returns</strong></td>
+                                <td>
+                                    <code>{Folio}</code>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>Folio.initialize()</h3>
+                        <table class="table table-bordered">
+                            <tr>
+                                <td><strong>Action</strong></td>
+                                <td>
+                                    Initializer function for the plugin.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Returns</strong></td>
+                                <td>
+                                    <code>{Folio}</code>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -110,7 +524,7 @@
 
         // This definition would work, but see the same definition at the end of $(function(){...}) for more details.
         window.updateMessage = function (page) {
-            $('#MessageTwo', d).text('Opened Page #' + page);
+            $('#MessageTwo', d).text('Opened Page #' + page + ' {window.updateMessage()}');
         };
 
         $(function () {
@@ -130,10 +544,9 @@
                 }
             }).GetFolio().link($paginationOneBottom.GetFolio());
 
-//            $paginationOneBottom.GetFolio().link($paginationOneTop.GetFolio());
+            $paginationOneBottom.GetFolio().link($paginationOneTop.GetFolio());
 
             // You can get Folio object linked to a pagination using $.fn.GetFolio method and even from an array.
-            // Note: Check that for the second Folio we don't have the desired onUpdate() function.
             $('.Pagination', d).GetFolio().each(function () {
                 console.log(this);
             });
@@ -142,9 +555,9 @@
             // you will find that the onUpdate() does not work. This is because Folio.js is included first and its
             // version of $(function(){...}) is called before this one. So the function name being passed to the data
             // attribute should be declared outside, and before, the $(function(){...}) is called.
-//            window.updateMessage = function (page) {
-//                $('#MessageTwo', d).text('Opened Page #' + page);
-//            };
+            window.updateMessage = function (page) {
+                $('#MessageTwo', d).text('Opened Page #' + page + ' from function inside $(function(){...})');
+            };
 
         });
     })(jQuery, document);

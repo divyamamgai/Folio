@@ -185,7 +185,7 @@
         /**
          * Updates the .FolioPages page numbering corresponding to the current activePage. No new element is
          * created and only the numbers(text) of the existing page number elements is updated using the cached
-         * .FolioPages .FolioPage jQuery object array i.e., this.$pageArray. Also updates(Either removes or adds
+         * .FolioPages .FolioPage jQuery object array i.e., this.$pageArray. Also updates (Either removes or adds
          * the .Disabled class based on the condition.) the next and previous buttons .Disabled class.
          * Note: It also calls the this.properties.onUpdate() function automatically.
          * @param {boolean} [disableOnUpdate] - If true then onUpdate is not called. Default is false.
@@ -290,7 +290,7 @@
         /**
          * Sets the Active Page of the pagination to the given page number and also calls update() function
          * automatically.
-         * @param {int} page - Page Number to set the Active Page to.
+         * @param {int} page - Page Number to set the activePage to.
          * @param {boolean} [disableOnUpdate] - If true then onUpdate is not called. Default is false.
          * @param {boolean} [disableSync] - If true then synchronisation is not done i.e., setActivePage(page)
          * is not called for the linked Folio objects. Default is false.
